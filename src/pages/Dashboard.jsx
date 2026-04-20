@@ -5,7 +5,7 @@ import {
   LogOut, X, Upload, Copy, Check, MoreVertical, 
   LayoutDashboard, User as UserIcon, ExternalLink, Package,
   TrendingUp, BarChart3, Box, AlertCircle, Search, Filter, ChevronRight,
-  ArrowUpRight
+  ArrowUpRight, Menu, Star, Zap
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { auth, db } from '../lib/firebase';
