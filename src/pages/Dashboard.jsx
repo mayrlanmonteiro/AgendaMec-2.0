@@ -20,22 +20,22 @@ import { categorias as objCategorias, marcas as objMarcas } from '../data/mockDa
 // --- Sub-components para Dashboard ---
 
 const StatCard = ({ icon: Icon, title, value, detail, colorClass }) => (
-  <div className="bg-white p-8 rounded-[32px] border border-gray-100 flex items-start justify-between group cursor-default shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-1">
+  <div className="bg-white p-7 rounded-[32px] border border-gray-100 flex items-start justify-between group cursor-default shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-1">
     <div className="space-y-4">
-      <div className={`w-14 h-14 rounded-2xl inline-flex items-center justify-center ${colorClass} bg-opacity-10 transition-all duration-500 group-hover:bg-opacity-20`}>
-        <Icon size={28} className={colorClass.replace('bg-', 'text-')} />
+      <div className={`w-14 h-14 rounded-2xl inline-flex items-center justify-center ${colorClass} bg-opacity-10 transition-all duration-300 group-hover:scale-110`}>
+        <Icon size={26} className={colorClass.replace('bg-', 'text-')} />
       </div>
       <div>
-        <p className="text-[11px] font-black text-gray-400 uppercase tracking-[0.2em]">{title}</p>
-        <div className="flex items-baseline gap-2">
-           <h3 className="text-4xl font-black text-gray-900 mt-1 tracking-tighter">{value}</h3>
-           {detail && <p className="text-xs font-bold text-gray-400">{detail}</p>}
+        <p className="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em]">{title}</p>
+        <div className="flex items-baseline gap-2 mt-1">
+           <h3 className="text-3xl font-black text-gray-900 tracking-tighter">{value}</h3>
+           {detail && <p className="text-[10px] font-bold text-gray-400">{detail}</p>}
         </div>
       </div>
     </div>
-    <div>
-       <button className="p-2 text-gray-200 hover:text-gray-900 transition-colors">
-         <MoreVertical size={20} />
+    <div className="opacity-0 group-hover:opacity-100 transition-opacity">
+       <button className="p-2 text-gray-300 hover:text-gray-900 transition-colors">
+         <MoreVertical size={18} />
        </button>
     </div>
   </div>
@@ -416,28 +416,28 @@ export default function Dashboard() {
                  <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-pink-900/80 to-purple-950 rounded-[48px] lg:rounded-[64px] shadow-2xl transition-all duration-1000 group-hover:scale-[1.01]"></div>
                  <div className="absolute top-0 left-0 w-1/2 h-full bg-gradient-to-r from-white/5 to-transparent skew-x-[-20deg] -translate-x-24"></div>
                  
-                 <div className="relative z-10 p-10 lg:p-16 flex flex-col xl:flex-row items-center justify-between gap-12 text-center xl:text-left">
-                    <div className="flex flex-col lg:flex-row items-center gap-10">
-                       <div className="w-24 h-24 bg-white/10 backdrop-blur-3xl rounded-[36px] flex items-center justify-center border border-white/20 shadow-2xl shadow-pink-500/20 active:rotate-12 transition-transform">
-                          <Share2 size={40} className="text-white" />
+                 <div className="relative z-10 p-10 lg:p-14 flex flex-col xl:flex-row items-center justify-between gap-10 text-center xl:text-left">
+                    <div className="flex flex-col lg:flex-row items-center gap-8">
+                       <div className="w-20 h-20 bg-white/10 backdrop-blur-3xl rounded-[32px] flex items-center justify-center border border-white/20 shadow-2xl shadow-pink-500/20 active:rotate-12 transition-transform">
+                          <Share2 size={32} className="text-white" />
                        </div>
-                       <div className="space-y-3">
-                          <h3 className="text-4xl font-black text-white tracking-tight font-outfit">Sua Loja está no ar!</h3>
-                          <p className="text-pink-100/60 font-medium text-xl max-w-lg">O link abaixo leva seus clientes direto para sua vitrine digital personalizada.</p>
+                       <div className="space-y-2">
+                          <h3 className="text-3xl lg:text-4xl font-black text-white tracking-tight font-outfit">Sua Loja está no ar!</h3>
+                          <p className="text-pink-100/60 font-medium text-lg max-w-lg">O link abaixo leva seus clientes direto para sua vitrine digital personalizada.</p>
                        </div>
                     </div>
 
-                    <div className="w-full lg:w-auto scale-110 xl:scale-100">
-                       <div className="bg-white/10 backdrop-blur-md rounded-[32px] p-3 flex flex-col sm:flex-row items-center gap-3 border border-white/10 shadow-inner max-w-xl">
-                          <div className="flex-1 px-8 py-4 font-black text-white text-base truncate tracking-tight lowercase">
+                    <div className="w-full lg:w-auto max-w-2xl">
+                       <div className="bg-white/10 backdrop-blur-md rounded-[32px] p-2 flex flex-col sm:flex-row items-center gap-2 border border-white/10 shadow-inner group/link">
+                          <div className="flex-1 px-6 py-4 font-bold text-white text-sm lg:text-base break-all tracking-tight lowercase">
                              {lojaUrl}
                           </div>
                           <button 
                             onClick={copyToClipboard}
-                            className={`w-full sm:w-auto px-10 py-5 rounded-[24px] flex items-center justify-center gap-3 transition-all duration-500 font-black shadow-xl ${copied ? 'bg-green-500 text-white' : 'bg-white text-gray-900 hover:scale-105 active:scale-95'}`}
+                            className={`w-full sm:w-auto px-10 py-5 rounded-[26px] flex items-center justify-center gap-3 transition-all duration-500 font-black shadow-xl ${copied ? 'bg-green-500 text-white' : 'bg-white text-gray-900 hover:scale-[1.02] active:scale-95'}`}
                           >
-                            {copied ? <Check size={22} className="stroke-[3px]" /> : <Copy size={22} />}
-                            <span className="text-sm uppercase tracking-widest">{copied ? 'Copiado!' : 'Copiar'}</span>
+                            {copied ? <Check size={20} className="stroke-[3px]" /> : <Copy size={20} />}
+                            <span className="text-xs uppercase tracking-widest">{copied ? 'Copiado!' : 'Copiar Link'}</span>
                           </button>
                        </div>
                     </div>
@@ -464,11 +464,11 @@ export default function Dashboard() {
                   <table className="w-full text-left border-collapse">
                     <thead className="bg-[#FBFBFC] border-b border-gray-50">
                       <tr>
-                        <th className="px-10 py-8 text-[11px] font-black text-gray-400 uppercase tracking-[0.25em]">Informação do Produto</th>
-                        <th className="px-10 py-8 text-[11px] font-black text-gray-400 uppercase tracking-[0.25em]">Sinalização</th>
-                        <th className="px-10 py-8 text-[11px] font-black text-gray-400 uppercase tracking-[0.25em] text-center">Valor Unitário</th>
-                        <th className="px-10 py-8 text-[11px] font-black text-gray-400 uppercase tracking-[0.25em] text-center">Estoque</th>
-                        <th className="px-10 py-8 text-[11px] font-black text-gray-400 uppercase tracking-[0.25em] text-right">Ações</th>
+                        <th className="px-10 py-6 text-[10px] font-black text-gray-400 uppercase tracking-[0.25em]">Informação do Produto</th>
+                        <th className="px-10 py-6 text-[10px] font-black text-gray-400 uppercase tracking-[0.25em]">Sinalização</th>
+                        <th className="px-10 py-6 text-[10px] font-black text-gray-400 uppercase tracking-[0.25em] text-center">Valor Unitário</th>
+                        <th className="px-10 py-6 text-[10px] font-black text-gray-400 uppercase tracking-[0.25em] text-center">Estoque</th>
+                        <th className="px-10 py-6 text-[10px] font-black text-gray-400 uppercase tracking-[0.25em] text-right">Ações</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-50/60">
@@ -513,8 +513,8 @@ export default function Dashboard() {
                                   <span className="text-[9px] font-bold text-gray-300 uppercase tracking-widest">Base Padrão</span>
                                </div>
                             </td>
-                            <td className="px-10 py-8 text-center">
-                              <div className={`inline-flex flex-col items-center px-5 py-2.5 rounded-2xl border ${produto.estoque > 5 ? 'bg-green-50 border-green-100 text-green-700' : 'bg-red-50 border-red-100 text-red-600'}`}>
+                            <td className="px-10 py-6 text-center">
+                              <div className={`inline-flex flex-col items-center px-5 py-2.5 rounded-2xl border ${produto.estoque > 3 ? 'bg-green-50 border-green-100 text-green-700' : 'bg-red-50 border-red-100 text-red-600'}`}>
                                  <span className="text-lg font-black">{produto.estoque}</span>
                                  <span className="text-[9px] font-black uppercase tracking-tighter opacity-70">unidades</span>
                               </div>
