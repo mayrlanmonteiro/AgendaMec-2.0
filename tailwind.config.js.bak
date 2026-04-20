@@ -1,0 +1,9 @@
+/** @type {import('tailwindcss').Config} */
+// Tailwind v4 não usa este arquivo para tema — as cores e fontes estão em src/index.css (@theme).
+// Mantemos apenas o content scan.
+export default {
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
+}
