@@ -70,7 +70,7 @@ export default function Dashboard() {
   const revendedor = profileData || { nome: 'Carregando...', slug_url: 'carregando...', biografia: '', whatsapp: '' };
   const [lojaProdutos, setLojaProdutos] = useState([]);
   const [loadingProdutos, setLoadingProdutos] = useState(true);
-  const [activeTab, setActiveTab] = useState('produtos');
+  const [activeTab, setActiveTab] = useState('dashboard');
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
 
@@ -262,11 +262,22 @@ export default function Dashboard() {
           <p className="px-4 text-[10px] font-black text-gray-400 uppercase tracking-[0.25em] mb-6">Administração</p>
           
           <button 
+            onClick={() => { setActiveTab('dashboard'); setIsSidebarOpen(false); }}
+            className={`w-full flex items-center justify-between px-6 py-4.5 rounded-2xl font-black transition-all duration-300 ${activeTab === 'dashboard' ? 'bg-pink-50 text-pink-600 shadow-sm' : 'text-gray-400 hover:text-gray-900 hover:bg-gray-50'}`}
+          >
+            <div className="flex items-center gap-4">
+              <LayoutDashboard size={22} /> 
+              <span className="text-sm uppercase tracking-wider">Dashboard</span>
+            </div>
+            {activeTab === 'dashboard' && <ChevronRight size={16} />}
+          </button>
+
+          <button 
             onClick={() => { setActiveTab('produtos'); setIsSidebarOpen(false); }}
             className={`w-full flex items-center justify-between px-6 py-4.5 rounded-2xl font-black transition-all duration-300 ${activeTab === 'produtos' ? 'bg-pink-50 text-pink-600 shadow-sm' : 'text-gray-400 hover:text-gray-900 hover:bg-gray-50'}`}
           >
             <div className="flex items-center gap-4">
-              <LayoutDashboard size={22} /> 
+              <Box size={22} /> 
               <span className="text-sm uppercase tracking-wider">Produtos</span>
             </div>
             {activeTab === 'produtos' && <ChevronRight size={16} />}
@@ -354,7 +365,7 @@ export default function Dashboard() {
                  <span className="text-[10px] font-black uppercase tracking-widest">Área Administrativa</span>
               </div>
               <h1 className="text-5xl lg:text-6xl font-black text-gray-900 tracking-tight font-outfit">
-                {activeTab === 'produtos' ? 'Gestão de Estoque' : 'Configurações'}
+                {activeTab === 'dashboard' ? 'Painel Geral' : activeTab === 'produtos' ? 'Gestão de Estoque' : 'Configurações'}
               </h1>
               <p className="text-gray-400 text-xl font-medium max-w-2xl">
                  Organize seu catálogo, gerencie pedidos e personalize sua experiência.
@@ -377,8 +388,8 @@ export default function Dashboard() {
             </div>
           </section>
 
-          {activeTab === 'produtos' && (
-            <>
+          {activeTab === 'dashboard' && (
+            <div className="space-y-12 animate-fade-in">
               {/* STATS FOLD */}
               <section className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-8">
                  <StatCard 
@@ -444,7 +455,49 @@ export default function Dashboard() {
                  </div>
               </section>
 
-              {/* PRODUCT TABLE (REFINED FOR 100% ZOOM) */}
+              {/* QUICK ACTIONS */}
+              <section className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                 <div className="bg-white p-10 rounded-[48px] border border-gray-100 shadow-sm space-y-6">
+                    <div className="flex items-center justify-between">
+                       <h4 className="text-xl font-black font-outfit uppercase tracking-tight text-gray-900">Atalhos Administrativos</h4>
+                       <Zap className="text-pink-100 fill-pink-500" size={24} />
+                    </div>
+                    <div className="grid grid-cols-2 gap-4">
+                       <button onClick={() => setActiveTab('produtos')} className="p-8 bg-gray-50 rounded-[32px] hover:bg-pink-50 hover:text-pink-600 transition-all duration-500 font-black text-sm flex flex-col items-center gap-3 group">
+                          <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform"><Plus size={24} /></div> Gerenciar Produtos
+                       </button>
+                       <button onClick={() => setActiveTab('perfil')} className="p-8 bg-gray-50 rounded-[32px] hover:bg-purple-50 hover:text-purple-600 transition-all duration-500 font-black text-sm flex flex-col items-center gap-3 group">
+                          <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform"><UserIcon size={24} /></div> Meu Negócio
+                       </button>
+                    </div>
+                 </div>
+
+                 <div className="bg-gradient-to-br from-pink-500 to-purple-600 p-10 rounded-[48px] shadow-2xl shadow-pink-500/20 text-white space-y-6 relative overflow-hidden">
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 blur-3xl rounded-full -translate-y-12 translate-x-12"></div>
+                    <h4 className="text-xl font-black font-outfit uppercase tracking-tight">Status da Conta</h4>
+                    <div className="space-y-6">
+                       <div className="flex justify-between items-end">
+                          <div>
+                             <p className="text-3xl font-black tracking-tight">Plano Profissional</p>
+                             <p className="text-sm font-bold opacity-70">Acesso total liberado</p>
+                          </div>
+                          <div className="text-right">
+                             <p className="text-2xl font-black">100%</p>
+                             <p className="text-[10px] font-black uppercase tracking-widest opacity-60">Funcional</p>
+                          </div>
+                       </div>
+                       <div className="w-full h-4 bg-white/20 rounded-full p-1 border border-white/10">
+                          <div className="w-full h-full bg-white rounded-full shadow-[0_0_15px_rgba(255,255,255,0.5)]"></div>
+                       </div>
+                    </div>
+                 </div>
+              </section>
+            </div>
+          )}
+
+          {activeTab === 'produtos' && (
+            <div className="space-y-12 animate-fade-in">
+              {/* GESTÃO DE ESTOQUE E LOGÍSTICA */}
               <section className="space-y-8">
                 <div className="flex flex-col sm:flex-row items-center justify-between gap-6 px-4">
                    <div className="flex items-center gap-4">
